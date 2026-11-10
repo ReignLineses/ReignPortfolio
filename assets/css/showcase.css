@@ -1,0 +1,157 @@
+/* ==========================================================
+   REIGN – immersive showcase (light theme)
+   ========================================================== */
+
+.showcase {
+    --maxW: min(84vw, 1200px);   /* widest a project may be           */
+    --maxH: 70svh;               /* tallest a project may be (static) */
+    --step:  85svh;               /* scroll distance per project        */
+
+    padding: var(--s6) var(--gutter);
+    background: var(--bgSoft);
+}
+
+.showcaseEmpty { padding: var(--s7) var(--gutter); color: var(--muted); }
+.showcaseEmpty h2 { color: var(--text); margin-bottom: var(--s1); }
+
+/* ---------- One project (static layout) ---------- */
+.showcaseItem {
+    --fw: min(var(--maxW), calc(var(--maxH) * var(--ar)));
+    margin-block: var(--s6);
+}
+.showcaseLink  { display: block; }
+.showcaseInner { width: max(var(--fw), min(22rem, 100%)); margin-inline: auto; }
+
+.showcaseFrame {
+    width: var(--fw);
+    margin-inline: auto;
+    overflow: hidden;
+    transition: transform var(--tMed) var(--ease);
+}
+
+@media (hover: hover) {
+    .showcaseLink:hover .showcaseFrame { transform: scale(1.015); }
+}
+
+/* ---------- Caption ---------- */
+.showcaseCaption {
+    margin-top: var(--s2);
+    padding-top: var(--s2);
+    border-top: 1px solid var(--text);
+}
+.showcaseTitle {
+    font-weight: 700;
+    font-size: clamp(1.25rem, 2.6vw, 2rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+.showcaseArrow {
+    display: inline-block;
+    margin-left: 0.3em;
+    opacity: 0;
+    transform: translate(-0.3em, 0.3em);
+    transition: opacity var(--tFast) var(--ease), transform var(--tMed) var(--ease);
+}
+.showcaseLink:hover .showcaseArrow,
+.showcaseLink:focus-visible .showcaseArrow { opacity: 1; transform: none; }
+.showcaseMeta { margin-top: 0.35rem; font-size: 0.9375rem; color: var(--muted); }
+
+/* ---------- HUD ---------- */
+.showcaseHud { margin-bottom: var(--s3); }
+.showcaseLabel { font-size: 0.875rem; color: var(--muted); }
+.showcaseCounter { display: none; }
+
+/* ---------- Skip button ---------- */
+.showcaseActions { display: flex; flex-wrap: wrap; gap: var(--s1); margin-bottom: var(--s3); }
+.showcaseSkip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s1);
+    padding: 0.6rem 1.1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: 1px solid var(--text);
+    border-radius: 999px;
+    background: var(--bg);
+    transition: background var(--tFast) var(--ease), color var(--tFast) var(--ease);
+}
+.showcaseSkip:hover,
+.showcaseSkip:focus-visible { background: var(--text); color: var(--bg); }
+
+/* ==========================================================
+   IMMERSIVE MODE (class added by showcase.js)
+   ========================================================== */
+.showcase.isImmersive {
+    --maxH: max(14rem, calc(100svh - var(--headerH) - 16rem));
+    padding: 0;
+    height: calc(100svh + var(--steps) * var(--step));
+}
+
+.isImmersive .showcaseStage {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+}
+.isImmersive .showcaseItems { position: absolute; inset: 0; }
+
+.isImmersive .showcaseItem {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: calc(var(--headerH) + var(--s2)) var(--gutter) 5.5rem;
+    opacity: 0;
+    will-change: transform, opacity;
+    pointer-events: none;
+}
+.isImmersive .showcaseItem.isActive .showcaseLink { pointer-events: auto; }
+
+.isImmersive .showcaseHud {
+    position: absolute;
+    left: var(--gutter);
+    bottom: var(--s3);
+    margin: 0;
+    z-index: 300;
+    pointer-events: none;
+}
+.isImmersive .showcaseCounter {
+    display: block;
+    margin-top: 0.15rem;
+    font-family: var(--fontDisplay);
+    font-weight: 800;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+}
+.showcaseOf { color: var(--muted); }
+
+/* In immersive mode the button floats bottom-right, above the projects */
+.isImmersive .showcaseActions {
+    position: absolute;
+    right: var(--gutter);
+    bottom: var(--s3);
+    margin: 0;
+    z-index: 300;
+}
+@media (max-width: 600px) {
+    .isImmersive .showcaseActions { bottom: var(--s6); }
+}
+
+/* ---------- View all projects ---------- */
+.allProjects { padding: var(--s5) var(--gutter); border-top: 1px solid var(--text); }
+.allProjectsLink {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--fontDisplay);
+    font-weight: 800;
+    font-size: clamp(1.5rem, 5vw, 3.5rem);
+    letter-spacing: -0.02em;
+    transition: color var(--tMed) var(--ease);
+}
+.allProjectsLink:hover { color: var(--muted); }
+

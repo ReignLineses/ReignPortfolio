@@ -1,0 +1,53 @@
+/* ==========================================================
+   REIGN – single project page
+   ========================================================== */
+
+.project { padding: calc(var(--headerH) + var(--s5)) var(--gutter) var(--s7); }
+
+.projectHead { display: grid; gap: var(--s3); margin-bottom: var(--s5); }
+.projectBack { justify-self: start; font-size: 0.9375rem; border-bottom: 1px solid var(--line); }
+.projectBack:hover { border-color: var(--text); }
+.projectTitle {
+    font-weight: 800;
+    font-size: clamp(2.5rem, 9vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+}
+.projectMeta { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s5); margin: 0; }
+.projectMeta dt { font-size: 0.875rem; color: var(--muted); }
+.projectMeta dd { margin: 0; font-weight: 500; }
+.projectText { max-width: 56ch; font-size: 1.125rem; }
+
+/* Images: each sits in a soft panel, at its real proportions */
+.projectShots { display: grid; gap: var(--s3); }
+.shot {
+    --maxH: 85svh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    padding: var(--s4) var(--s2);
+    background: var(--bgSoft);
+}
+.shotFrame { width: min(100%, calc(var(--maxH) * var(--ar)), var(--cap)); }
+@media (min-width: 900px) { .shot { padding: var(--s5) var(--s4); } }
+
+/* Previous / next */
+.projectNav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s3);
+    margin-top: var(--s6);
+    padding-top: var(--s3);
+    border-top: 1px solid var(--text);
+}
+.projectNavLink { display: grid; gap: 0.25rem; }
+.projectNavLinkNext { text-align: right; grid-column: 2; }
+.projectNavLabel { font-size: 0.9375rem; color: var(--muted); }
+.projectNavTitle {
+    font-family: var(--fontDisplay);
+    font-weight: 700;
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    letter-spacing: -0.02em;
+    transition: color var(--tMed) var(--ease);
+}
+.projectNavLink:hover .projectNavTitle { color: var(--muted); }

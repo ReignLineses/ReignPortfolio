@@ -1,0 +1,178 @@
+/* ==========================================================
+   REIGN – homepage: hero, ticker, identities, experience
+   ========================================================== */
+
+/* ---------- Hero ---------- */
+.hero {
+    position: relative;
+    min-height: 100svh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: calc(var(--headerH) + var(--s3)) var(--gutter) var(--s4);
+    /* Faint vertical guide lines: the one decorative touch */
+    background-image: linear-gradient(to right, var(--line) 1px, transparent 1px);
+    background-size: calc((100% - 2 * var(--gutter)) / 4) 100%;
+    background-position: var(--gutter) 0;
+    background-repeat: repeat-x;
+    background-clip: border-box;
+}
+.heroTop { display: flex; justify-content: space-between; gap: var(--s2); }
+.heroSmall { font-size: 0.875rem; color: var(--muted); }
+.heroStatus { display: inline-flex; align-items: center; gap: var(--s1); }
+
+.heroTitle {
+    align-self: end;
+    font-weight: 800;
+    font-size: clamp(3.5rem, 18vw, 18rem);
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    margin-left: -0.05em;
+    padding-bottom: var(--s4);
+}
+
+.heroBottom {
+    display: grid;
+    gap: var(--s4);
+    padding-top: var(--s3);
+    border-top: 1px solid var(--text);
+}
+.heroIntro { max-width: 36ch; font-size: 1.0625rem; }
+.heroRoles { display: grid; gap: 0.15rem; font-weight: 500; }
+
+.heroCue { display: inline-flex; align-items: center; gap: var(--s2); font-size: 0.9375rem; font-weight: 500; }
+.heroCueLine { position: relative; width: 1px; height: 3rem; background: var(--line); overflow: hidden; }
+.heroCueLine::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--text);
+    transform: translateY(-100%);
+    animation: cue 2.2s var(--ease) infinite;
+}
+@keyframes cue { to { transform: translateY(100%); } }
+
+@media (min-width: 900px) {
+    .heroBottom { grid-template-columns: repeat(12, 1fr); align-items: end; }
+    .heroIntro  { grid-column: 1 / span 4; }
+    .heroRoles  { grid-column: 6 / span 4; }
+    .heroCue    { grid-column: 11 / span 2; justify-self: end; }
+}
+
+/* ---------- Ticker (slow marquee) ---------- */
+.ticker {
+    overflow: hidden;
+    border-block: 1px solid var(--text);
+    background: var(--paper);
+}
+.tickerTrack { display: flex; width: max-content; animation: ticker 45s linear infinite; }
+.ticker ul { display: flex; flex-shrink: 0; }
+.ticker li {
+    padding: var(--s2) var(--s4);
+    font-family: var(--fontDisplay);
+    font-weight: 700;
+    font-size: clamp(1rem, 2vw, 1.375rem);
+    white-space: nowrap;
+}
+.ticker li::after { content: "✦"; margin-left: var(--s4); color: var(--gold); font-size: 0.8em; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+
+/* ---------- Section heading (shared) ---------- */
+.sectionHead {
+    display: grid;
+    gap: var(--s3);
+    margin-bottom: var(--s5);
+}
+.sectionHeadTitle {
+    font-weight: 800;
+    font-size: clamp(2.25rem, 6vw, 5rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
+}
+.sectionHeadText { max-width: 42ch; color: var(--muted); }
+@media (min-width: 900px) {
+    .sectionHead { grid-template-columns: repeat(12, 1fr); align-items: end; }
+    .sectionHeadTitle { grid-column: 1 / span 7; }
+    .sectionHeadText  { grid-column: 9 / span 4; }
+}
+
+/* ---------- Identities ---------- */
+.identities { padding: var(--s7) var(--gutter) var(--s6); scroll-margin-top: var(--headerH); }
+.identitiesGrid { display: grid; gap: var(--s2); }
+.identity {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s2);
+    padding: var(--s3);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    transition: border-color var(--tMed) var(--ease), transform var(--tMed) var(--ease);
+}
+.identity:hover { border-color: var(--text); transform: translateY(-4px); }
+.identityTitle {
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+.identityText { color: var(--muted); }
+.identityTags { display: flex; flex-wrap: wrap; gap: var(--s1); margin-top: auto; padding-top: var(--s2); }
+.identityTags li {
+    padding: 0.2rem 0.7rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.8125rem;
+}
+@media (min-width: 640px)  { .identitiesGrid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .identitiesGrid { grid-template-columns: repeat(4, 1fr); } }
+@media (hover: none) { .identity:hover { transform: none; } }
+
+/* ---------- Experience ---------- */
+.experience { padding: var(--s6) var(--gutter) var(--s7); }
+.experienceList { border-top: 1px solid var(--text); }
+.job {
+    display: grid;
+    gap: var(--s2);
+    padding: var(--s4) 0;
+    border-bottom: 1px solid var(--line);
+}
+.jobPeriod { display: inline-flex; align-items: center; gap: var(--s1); font-size: 0.9375rem; color: var(--muted); }
+.jobRole {
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+.jobPlace { margin-top: 0.25rem; color: var(--muted); }
+.jobPoints { display: grid; gap: var(--s1); max-width: 52ch; }
+.jobPoints li { position: relative; padding-left: var(--s3); }
+.jobPoints li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.75em;
+    width: 0.75rem;
+    height: 1px;
+    background: var(--text);
+}
+@media (min-width: 900px) {
+    .job { grid-template-columns: repeat(12, 1fr); align-items: start; padding: var(--s5) 0; }
+    .jobPeriod { grid-column: 1 / span 3; }
+    .jobMain   { grid-column: 4 / span 4; }
+    .jobPoints { grid-column: 8 / span 5; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .heroCueLine::after { animation: none; transform: none; opacity: 0.4; }
+    .tickerTrack { animation: none; }
+    .ticker { overflow-x: auto; }
+}
+
+
+/* ---------- About page intro ---------- */
+.aboutIntro {
+    display: grid;
+    gap: var(--s3);
+    padding: calc(var(--headerH) + var(--s6)) var(--gutter) var(--s5);
+}
+.aboutIntroText { max-width: 44ch; font-size: 1.125rem; }
